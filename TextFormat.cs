@@ -1,5 +1,5 @@
 ﻿namespace SVTextCutter.Format;
-public abstract class Header
+public class Header
 {
 	public string? Target { get; set; }
 	public int FormatVersion { get; set; }
@@ -7,7 +7,7 @@ public abstract class Header
 	public bool Compressed { get; set; }
 }
 
-public abstract class Reader
+public class Reader
 {
 	public string? Type { get; set; }
 	public int Version { get; set; }
