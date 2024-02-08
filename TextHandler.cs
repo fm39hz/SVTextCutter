@@ -3,11 +3,11 @@ using SVTextCutter.Format;
 
 namespace SVTextCutter.Worker;
 
-public static class JsonTextHandler
+public static class TextHandler
 {
 	private const string PATTERN = "*.json";
 
-	public static IEnumerable<string> GetAllStrings(string projectPath)
+	public static IEnumerable<string> GetAllText(string projectPath)
 	{
 		var _files = Directory.GetFiles(projectPath, PATTERN, SearchOption.AllDirectories);
 		foreach (var _file in _files)
@@ -16,9 +16,9 @@ public static class JsonTextHandler
 		}
 	}
 
-	public static void SplitTextValue(string inputValue)
+	public static string GetContentValue(string inputValue)
 	{
 		var _defaultText = JsonConvert.DeserializeObject<DefaultTextFormat>(inputValue);
-		Console.WriteLine(JsonConvert.SerializeObject(_defaultText?.Content));
+		return JsonConvert.SerializeObject(_defaultText?.Content);
 	}
 }
