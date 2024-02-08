@@ -1,21 +1,22 @@
 ﻿namespace SVTextCutter.Format;
-public class Header
+
+public sealed class Header
 {
 	public string? Target { get; set; }
 	public int FormatVersion { get; set; }
 	public bool Hidef { get; set; }
-	public bool Compressed { get; set; }
+	public int Compressed { get; set; }
 }
 
-public class Reader
+public sealed class Reader
 {
 	public string? Type { get; set; }
 	public int Version { get; set; }
 }
 
-public class DefaultTextFormat
+public sealed class DefaultTextFormat
 {
 	public Header? Header { get; set; }
 	public List<Reader>? Readers { get; set; }
-	public Dictionary<string, string>? Content { get; set; }
+	public Dictionary<string, string>? Content { get; } = new();
 }
