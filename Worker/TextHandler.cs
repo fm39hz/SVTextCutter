@@ -11,6 +11,8 @@ public static class OsSplittingChar
 
 public class TextHandler
 {
+	private const string BASE_LANG = "es-ES";
+	private const string TARGET_LANG = "vi-VI";
 	private const string PATTERN = "*.json";
 	private const string OUTPUT_DIR = "CP";
 	private const string INPUT_DIR = "Project";
@@ -32,7 +34,7 @@ public class TextHandler
 		foreach (var _file in _files)
 		{
 			var _value = File.ReadAllText(_file);
-			Instance._fileContents.Add(_file.Replace(INPUT_DIR, OUTPUT_DIR), GetContentValue(_value));
+			Instance._fileContents.Add(_file.Replace(BASE_LANG, TARGET_LANG), GetContentValue(_value));
 		}
 	}
 
