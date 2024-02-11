@@ -32,7 +32,7 @@ public class TextHandler
 		foreach (var _file in _files)
 		{
 			var _value = File.ReadAllText(_file);
-			Instance._fileContents.Add(_file, GetContentValue(_value));
+			Instance._fileContents.Add(_file.Replace(INPUT_DIR, OUTPUT_DIR), GetContentValue(_value));
 		}
 	}
 
@@ -44,10 +44,27 @@ public class TextHandler
 
 	private static void CreateOutputDirectory()
 	{
-		var _currentDirectory = Directory.GetCurrentDirectory() + Instance.SplitChar + OUTPUT_DIR;
-		if (!Directory.Exists(_currentDirectory))
+		foreach (var _subDirectories in Instance._fileContents.Select(path => path.Key.Split(Instance.SplitChar)))
 		{
-			Directory.CreateDirectory(_currentDirectory);
+			var _isSubDirectory = false;
+			var _index = 0;
+			var _currentPath = Directory.GetCurrentDirectory() + Instance.SplitChar + OUTPUT_DIR + Instance.SplitChar;
+			foreach (var _directory in _subDirectories)
+			{
+				_index++;
+				if (_isSubDirectory && _index < _subDirectories.Length)
+				{
+					_currentPath += _directory + Instance.SplitChar;
+					if (!Directory.Exists(_currentPath))
+					{
+						Directory.CreateDirectory(_currentPath);
+					}
+				}
+				else if (_directory == OUTPUT_DIR)
+				{
+					_isSubDirectory = true;
+				}
+			}
 		}
 	}
 
