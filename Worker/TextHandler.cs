@@ -38,7 +38,7 @@ public class TextHandler
 
 	private static string GetContentValue(string inputValue)
 	{
-		var _defaultText = JsonConvert.DeserializeObject<DefaultTextFormat>(inputValue);
+		var _defaultText = JsonConvert.DeserializeObject<TextFormat>(inputValue);
 		return JsonConvert.SerializeObject(_defaultText?.Content);
 	}
 
