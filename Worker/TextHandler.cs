@@ -16,8 +16,9 @@ public class TextHandler
 	private const string PATTERN = "*." + BASE_LANG + ".json";
 	private const string OUTPUT_DIR = "CP";
 	private const string INPUT_DIR = "Project";
+	private const string STRING_READER = "Microsoft.Xna.Framework.Content.StringReader";
 	private static readonly TextHandler Instance = new();
-	private readonly Dictionary<string, string> _fileContents;
+	private readonly Dictionary<string, string?> _fileContents;
 	public readonly string InputDir;
 	public readonly string? SplitChar;
 
@@ -38,10 +39,12 @@ public class TextHandler
 		}
 	}
 
-	private static string GetContentValue(string inputValue)
+	private static string? GetContentValue(string inputValue)
 	{
 		var _defaultText = JsonConvert.DeserializeObject<TextFormat>(inputValue);
-		return JsonConvert.SerializeObject(_defaultText?.Content);
+		return _defaultText!.Readers!.Any(reader => reader.Type == STRING_READER)
+			? JsonConvert.SerializeObject(_defaultText.Content)
+			: null;
 	}
 
 	private static void CreateOutputDirectory()
