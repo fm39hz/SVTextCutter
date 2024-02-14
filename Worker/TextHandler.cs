@@ -13,7 +13,7 @@ public class TextHandler
 {
 	private const string BASE_LANG = "es-ES";
 	private const string TARGET_LANG = "vi-VI";
-	private const string PATTERN = "*.json";
+	private const string PATTERN = "*." + BASE_LANG + ".json";
 	private const string OUTPUT_DIR = "CP";
 	private const string INPUT_DIR = "Project";
 	private static readonly TextHandler Instance = new();
@@ -34,7 +34,7 @@ public class TextHandler
 		foreach (var _file in _files)
 		{
 			var _value = File.ReadAllText(_file);
-			Instance._fileContents.Add(_file.Replace(BASE_LANG, TARGET_LANG), GetContentValue(_value));
+			Instance._fileContents.Add(_file, GetContentValue(_value));
 		}
 	}
 
@@ -75,7 +75,7 @@ public class TextHandler
 		CreateOutputDirectory();
 		foreach (var _item in Instance._fileContents)
 		{
-			File.WriteAllText(_item.Key, _item.Value);
+			File.WriteAllText(_item.Key.Replace(BASE_LANG, TARGET_LANG).Replace(INPUT_DIR, OUTPUT_DIR), _item.Value);
 		}
 	}
 }
