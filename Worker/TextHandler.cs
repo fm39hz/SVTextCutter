@@ -13,7 +13,7 @@ public class TextHandler
 {
 	private const string BASE_LANG = "es-ES";
 	private const string TARGET_LANG = "vi-VI";
-	private const string PATTERN = "*." + BASE_LANG + ".json";
+	private const string PATTERN = $"*.{BASE_LANG}.json";
 	private const string OUTPUT_DIR = "CP";
 	private const string INPUT_DIR = "Project";
 	private const string STRING_READER = "Microsoft.Xna.Framework.Content.StringReader";
